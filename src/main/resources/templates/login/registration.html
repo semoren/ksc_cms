@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="head :: header" th:with="title='注册'">
+</head>
+
+<body class="login-body">
+
+<div class="container">
+
+    <form class="form-signin" action="register" method="post">
+        <div class="form-signin-heading text-center">
+            <h1 class="sign-title">注册</h1>
+            <img src="../../static/images/login-logo.png" th:src="@{images/login-logo.png}" alt=""/>
+        </div>
+
+        <div class="login-wrap">
+            <input type="text" name="email" placeholder="邮箱" class="form-control" autofocus="autofocus"/>
+            <input type="text" name="name" placeholder="用户名" class="form-control"/>
+            <input type="password" name="password" placeholder="密码" class="form-control"/>
+            <!-- <input type="password" placeholder="确认密码" class="form-control"/> -->
+            <button type="submit" class="btn btn-lg btn-login btn-block">
+                <i class="fa fa-check"></i>
+            </button>
+
+            <div class="registration">
+                	已经注册?
+                <a href="login" class="">
+                    	登陆
+                </a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="../../static/js/jquery-1.10.2.min.js" th:src="@{js/jquery-1.10.2.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+<script src="../../static/js/modernizr.min.js" th:src="@{js/modernizr.min.js}"></script>
+
+</body>
+</html>

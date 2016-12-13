@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="head :: header" th:with="title='用户管理'">
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side" th:include="leftmenu :: leftmenu"></div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section" th:include="header-section :: section"></div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/sermo/confirmLogin">首页</a>
+                </li>
+                <li class="active"> 用户管理 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+			<div class="wrapper">
+				<div class="row">
+					<div class="col-sm-12">
+						<section class="panel">
+							<div class="panel-body">
+								<div class="adv-table">
+									<div class="clearfix">
+										<div class="btn-group">
+											<button id="editable-sample_new" class="btn btn-primary">
+												新增用户 <i class="fa fa-plus"></i>
+											</button>
+										</div>
+									</div>
+									<table class="display table table-bordered table-striped"
+										id="dynamic-table">
+										<thead>
+											<tr>
+												<th class="hidden-phone">id</th>
+												<!-- 不在手机端显示 -->
+												<th>用户名</th>
+												<th>邮箱</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="gradeA" th:each="userInfo:${userInfos}">
+												<td th:text="${userInfo.id}">123</td>
+												<td th:text="${userInfo.name}">admin</td>
+												<td th:text="${userInfo.email}">admin@gamil.com</td>
+												<td class="center">
+													<button class="btn btn-info" type="button">
+														<i class="fa fa-pencil"></i> 编辑
+													</button>
+													<button class="btn btn-danger" type="button">
+														<i class="fa fa-trash-o"></i> 删除
+													</button>
+													<button class="btn btn-success" type="button">
+														<i class="fa fa-eye"></i> 详情
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+
+			</div>
+			<!--body wrapper end-->
+
+        <!--footer section start-->
+       	<div th:include="footer :: copy"></div>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+</body>
+</html>

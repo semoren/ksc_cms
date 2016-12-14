@@ -10,13 +10,14 @@
 	<!--notification menu start -->
 	<div class="menu-right">
 		<ul class="notification-menu">
-			<li><a href="#" class="btn btn-default dropdown-toggle"
+			<li>
+				<a href="#" class="btn btn-default dropdown-toggle"
 				data-toggle="dropdown" th:text="${#httpSession.getAttribute('USER_SESSION').name}"> 用户名 <span class="caret"></span>
-			</a>
+				</a>
 				<ul class="dropdown-menu dropdown-menu-usermenu pull-right">
 					<li><a href="/sermo/logout" th:href="@{/logout}"><i class="fa fa-sign-out"></i>退出</a></li>
-				</ul></li>
-
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<!--notification menu end -->

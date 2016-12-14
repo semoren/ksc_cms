@@ -86,6 +86,7 @@ public class MenuRunner implements CommandLineRunner {
             list.set(i, menu);
         }
         mainMenus.put("/home", list);
+        mainMenus.put("/setting", list);
     }
 
     @Override

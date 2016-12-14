@@ -17,18 +17,20 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li><a href="/sermo/home" th:href="@{/home}"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li><a th:href="@{/home}"><i class="fa fa-home"></i> <span>主页</span></a></li>
                 
                 <li th:each="menu : ${menus}" class="menu-list" th:class="${menu.selected} ? 'menu-list nav-active' : 'menu-list'">
-                	<a href=""><i th:class="${menu.style}" class="fa fa-laptop"></i> <span th:text="${menu.name}">系统管理</span></a>
+                	<a href=""><i th:class="${menu.style}" class="fa fa-laptop"></i> <span th:text="${menu.name}"></span></a>
                 	
                     <ul class="sub-menu-list">
                        	<li th:each="subMenu : ${menu.subMenus}" th:if="${subMenu.disabled == false}" th:class="${subMenu.selected} ? 'active'">
-                       		<a th:href="@{${subMenu.url}}" th:text="${subMenu.name}" href="/sermo/userInfo/list"> 用户列表</a>
+                       		<a th:href="@{${subMenu.url}}" th:text="${subMenu.name}" href="/sermo/userInfo/list"></a>
                        	</li>
                     </ul>
                     
                 </li>
+
+                <li><a th:href="@{/setting}"><i class="fa fa-cogs"></i> <span>系统设置</span></a></li>
             </ul>
             <!--sidebar nav end-->
 

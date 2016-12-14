@@ -1,9 +1,6 @@
 package com.sermo.ksc.doman;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,6 +14,9 @@ public interface SubMenuRepository {
     @Select("select id, url, name, disabled from m_sub_menu where menu_id=#{menuId}")
     List<SubMenu> findByMenuId(String menuId);
 
+    @Results(id = "subMenu", value = {
+        @Result(column = "menu_id", property = "menuId")
+    })
     @Select("select id, menu_id, url, name, disabled, sort from m_sub_menu order by sort")
     List<SubMenu> findAll();
 

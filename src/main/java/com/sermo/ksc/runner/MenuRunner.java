@@ -75,13 +75,15 @@ public class MenuRunner implements CommandLineRunner {
         }
 
         List<Menu> list = menuService.findAll();
-        for (Menu menu : list) {
+        for (int i =0; i < list.size(); i++) {
+            Menu menu = list.get(i);
 
             List<SubMenu> listSubs = listMap.get(menu.getId()) == null ? new ArrayList<SubMenu>() : listMap.get(menu.getId());
             for (SubMenu subMenu : listSubs) {
                 mainMenus.put(subMenu.getUrl(), list);
             }
             menu.setSubMenus(listSubs);
+            list.set(i, menu);
         }
         mainMenus.put("/home", list);
     }

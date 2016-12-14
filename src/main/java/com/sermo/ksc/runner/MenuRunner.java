@@ -90,8 +90,8 @@ public class MenuRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("start---------------------------------------------");
+        System.out.println("---------------------初始化菜单 start ------------------------");
         init();
-        System.out.println("end----------------------------------------------");
+        System.out.println("---------------------初始化菜单 end   ------------------------");
     }
 }

@@ -27,6 +27,9 @@ public class LoginConfigurer extends WebMvcConfigurerAdapter{
     @Value("#{'${excludeSuffixs}'.split(',')}")
     private List<String> excludeSuffixs;
 
+    @Value("${login}")
+    private String loginUrl;
+
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new HandlerInterceptorAdapter() {
             @Override
@@ -41,7 +44,7 @@ public class LoginConfigurer extends WebMvcConfigurerAdapter{
                 }else {
                     Object object = request.getSession().getAttribute(Globals.USER_SESSION);
                     if (object == null) {
-                        response.sendRedirect("/ksc/login");
+                        response.sendRedirect(loginUrl);
                     }else {
                         List<Menu> menus = runner.process(url);
                         request.setAttribute("menus", menus);

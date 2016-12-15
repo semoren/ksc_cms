@@ -29,67 +29,68 @@
         <!-- page heading end-->
 
         <!--body wrapper start-->
-        <div class="wrapper">
+        <div class="wrapper col-md-12">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-12">
                     <section class="panel">
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal" action="setting" method="post">
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                        <label class="col-sm-offset-1 col-sm-2 control-label">营业时间</label>
-                                        <div class="col-sm-3 controls">
+                            <form role="form" class="form-horizontal" id="setting">
+                                <input type="hidden" name="id" th:value="${setting.id}"/>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-2 control-label">营业时间</label>
+                                        <div class="col-md-3 controls">
                                             <select class="form-control" name="bStart">
-                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}"></option>
+                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}" th:selected="${setting.bStart eq xStat.index } ? 'selected'"></option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-3 controls">
+                                        <div class="col-md-3 controls">
                                             <select class="form-control" name="bEnd">
-                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}"></option>
+                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}" th:selected="${setting.bEnd eq xStat.index } ? 'selected'"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                        <label class="col-sm-offset-1 col-sm-2 control-label">配送时间</label>
-                                        <div class="col-sm-3 controls">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-2 control-label">配送时间</label>
+                                        <div class="col-md-3 controls">
                                             <select class="form-control" name="dStart">
-                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}"></option>
+                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}" th:selected="${setting.dStart == xStat.index} ? 'selected'"></option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-3 controls">
+                                        <div class="col-md-3 controls">
                                             <select class="form-control" name="dEnd">
-                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}"></option>
+                                                <option th:each="x:${times}" th:value="${x}" th:text="${x}" th:selected="${setting.dEnd == xStat.index} ? 'selected'"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-4">
-                                        <label class="col-sm-offset-1 col-sm-2 control-label">营业状态</label>
-                                        <div class="col-sm-4 controls">
-                                            <label class="radio-inline">
-                                                <input type="radio" id="on" value="1" name="state"/>营业
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-2 control-label">营业状态</label>
+                                        <div class="col-md-4">
+                                            <label class="radio-inline control-label">
+                                                <input type="radio" id="on" value="1" name="state" th:checked="${setting.state == 1}"/>营业
                                             </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" id="off" value="0" name="state"/>歇业
+                                            <label class="radio-inline control-label">
+                                                <input type="radio" id="off" value="0" name="state" th:checked="${setting.state == 0}"/>歇业
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <label class="col-sm-2 control-label">用户协议</label>
-                                        <div class="col-sm-10 controls">
-                                            <textarea rows="20" class="form-control" name="agreement"></textarea>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-2 control-label">用户协议</label>
+                                        <div class="col-md-10 controls">
+                                            <textarea rows="20" class="form-control" name="agreement" th:text="${setting.agreement}"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <div class="col-sm-offset-2 col-sm-2 control-label">
-                                            <button type="submit" class="btn btn-default btn-lg btn-block">保存</button>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <div class="col-md-offset-2 col-md-2 control-label">
+                                            <button type="button" id="save" class="btn btn-default btn-lg btn-block">保存</button>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +107,32 @@
           
         </footer>
         <!--footer section end-->
+        <script th:src="@{/js/alertify/lib/alertify.js}"/>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+                var url = [[@{/setting}]];
+                var flag = [[${flag}]];
+                console.log(flag);
+                $(document).ready(function(){
+                    if (flag == 1){
+                        alertify.success("保存成功");
+                    }else if(flag == 0) {
+                        alertify.error("保存失败");
+                    }
 
+                    $('#save').click(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: $('#setting').serialize(),
+                            success: function (data) {
+                                location.href=url + '?flag=' + data;
+                            },
+                        });
+                    });
+                })
+            /*]]>*/
+        </script>
     </div>
     <!-- main content end-->
 </section>
